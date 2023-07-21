@@ -1,0 +1,109 @@
+﻿<Window x:Class="RegistrationClinik.Views.regClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistrationClinik.Views"
+        mc:Ignorable="d"
+        xmlns:l ="clr-namespace:RegistrationClinik.ViewModels"
+        Title="regClient" Height="450" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Добавление" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" 
+                   FontSize="26" 
+                   FontWeight="Bold"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.45*" />
+                <ColumnDefinition Width="0.75*" />
+                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="0.45*" />
+                <ColumnDefinition Width="0.75*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"
+                   Text="Ф.И.О." Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" 
+                   Text="Год рождения" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" 
+                   Text="Адресс проживания" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" 
+                   Text="Анализ" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" 
+                   Text="Лечащий врач" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" 
+                   Text="Дата регистрации" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" 
+                   Text="Аванс" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="2" 
+                   Text="Остаток" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="3" 
+                   Text="Оплачено" Style="{DynamicResource textbl}"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="4" Grid.Row="4" 
+                   Text="Оплата" Style="{DynamicResource textbl}"/>
+            <TextBox Height="40" Text="{Binding Item.Name}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource textbox}"/>
+            <DatePicker Height="40" SelectedDate="{Binding Item.Birday}" Grid.Column="2" Grid.Row="1" Style="{DynamicResource date}"/>
+            <TextBox Height="40" Text="{Binding Item.Adres}"  Grid.Column="2" Grid.Row="2" Style="{DynamicResource textbox}"/>
+            <TextBox Height="40" Text="{Binding Item.Analiz}" Grid.Column="2" Grid.Row="3" Style="{DynamicResource textbox}"/>
+            <TextBox Height="40" Text="{Binding Item.LDoctor}" Grid.Column="2" Grid.Row="4" Style="{DynamicResource textbox}"/>
+            <DatePicker Height="40" SelectedDate="{Binding Item.RegistrationDate}" Grid.Column="5" Grid.Row="0" Style="{DynamicResource date}"/>
+            <!--<TextBox  Grid.Column="4" Grid.Row="0" Style="{DynamicResource textbox}"/>-->
+            <TextBox Height="40" Grid.Column="5" Grid.Row="1" Style="{DynamicResource textbox}">
+                <TextBox.Text>
+                    <Binding Path="Item.Avans">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Height="40" Grid.Column="5" Grid.Row="2" Style="{DynamicResource textbox}">
+                <TextBox.Text>
+                    <Binding Path="Item.Ostatok">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Height="40" Grid.Column="5" Grid.Row="3" Style="{DynamicResource textbox}">
+                <TextBox.Text>
+                    <Binding Path="Item.Oplacheno">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Height="40" Grid.Column="5" Grid.Row="4" Style="{DynamicResource textbox}">
+                <TextBox.Text>
+                    <Binding Path="Item.Oplata">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Button Grid.Column="2" Background="Red" Grid.Row="5" Width="300"
+                Content="Отмена"  Click="Close"/>
+            <Button Grid.Column="5" Grid.Row="5" Width="300"
+                Content="Сохранить" Command="{Binding Create}" Click="Button_Click"/>
+        </Grid>
+       
+    </Grid>
+</Window>
