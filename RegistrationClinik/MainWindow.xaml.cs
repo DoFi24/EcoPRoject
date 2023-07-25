@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using RegistrationClinik.ViewModels;
+﻿using RegistrationClinik.ViewModels;
 using RegistrationClinik.Views;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Key = System.Windows.Input.Key;
 
 namespace RegistrationClinik
 {
@@ -13,38 +9,25 @@ namespace RegistrationClinik
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowVIewModel model;
-
+        private MainWindowVIewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
-            model = new MainWindowVIewModel();
-            DataContext = model;
+            viewModel = new MainWindowVIewModel();
+            DataContext = viewModel;
         } 
-
         private void showAddPage(object sender, RoutedEventArgs e)
         {
-            new regClient(model).Show();
+            new regClient(viewModel).Show();
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-
-        }
-
-        private void Edit(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Minimize(object sender, RoutedEventArgs e)
         {
-
+            this.WindowState = WindowState.Minimized;
         }
 
         private void showAddKartij(object sender, RoutedEventArgs e)
@@ -55,6 +38,11 @@ namespace RegistrationClinik
         private void showAddFilter(object sender, RoutedEventArgs e)
         {
             new AddFilters().Show();
+        }
+
+        private void Normal(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Normal;
         }
     }
 }

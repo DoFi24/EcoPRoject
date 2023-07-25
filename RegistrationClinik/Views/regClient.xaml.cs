@@ -8,13 +8,10 @@ namespace RegistrationClinik.Views
     /// </summary>
     public partial class regClient : Window
     {
-        public MainWindowVIewModel model;
-
-        public regClient(MainWindowVIewModel _model)
+        public regClient(MainWindowVIewModel _view)
         {
             InitializeComponent();
-            model = _model;
-            DataContext = model;
+            DataContext = new AddTableWindowViewModel(_view);
         }
 
         private void Close(object sender, RoutedEventArgs e)

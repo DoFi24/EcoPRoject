@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:RegistrationClinik.Views"
         xmlns:mt="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:AddTableWindowViewModel}"
         mc:Ignorable="d"
         xmlns:l ="clr-namespace:RegistrationClinik.ViewModels"
-        Title="regClient" Height="450" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True">
+        Title="regClient" Height="500" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
@@ -22,7 +23,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.5*" />
                 <ColumnDefinition Width="0.25*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.1*" />
@@ -41,6 +42,7 @@
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"
                    Text="Ф.И.О." Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
@@ -50,10 +52,23 @@
                    Text="Адресс проживания" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" 
                    Text="Дата установки" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-                <TextBox mt:HintAssist.Hint="Турсунбаев Элижан" Height="50" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                <TextBox mt:HintAssist.Hint="0558 07 08 41" mt:TransitionAssist.DisableTransitions="True" MaxLength="10" Height="50" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                <TextBox mt:HintAssist.Hint="Ош" Height="50"   Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                <DatePicker Height="50" mt:HintAssist.Hint="Выберите дату" Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <TextBox Text="{Binding ClientName}" FontSize="15" Padding="10" VerticalContentAlignment="Center"  mt:HintAssist.Hint="Ф.И.О." Height="50" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                <TextBox Text="{Binding ClientPhone}" FontSize="15" Padding="10" VerticalContentAlignment="Center" mt:HintAssist.Hint="Номер телефона" mt:TransitionAssist.DisableTransitions="True" MaxLength="10" Height="50" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                <TextBox Text="{Binding ClientAdres}" FontSize="15" Padding="10" VerticalContentAlignment="Center" mt:HintAssist.Hint="Адрес установки" Height="50"   Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                <DatePicker Text="{Binding ClientStartDate}" FontSize="15" Padding="10" VerticalContentAlignment="Center" Height="50" mt:HintAssist.Hint="Выберите дату" Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" 
+                   Text="Фильтр" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}"/>
+                <ComboBox FontSize="11" Grid.Column="1" Grid.Row="4" 
+                          ItemsSource="{Binding FilterCollection}"
+                          Height="50" Style="{StaticResource MaterialDesignFilledComboBox}"
+                          SelectedItem="{Binding ClientSelectedFilter}"
+                          mt:HintAssist.Hint="Выберите фильтр">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextAlignment="Left" Text="{Binding Name}" FontSize="16"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
             <Grid Grid.Column="3">
                 <Grid.ColumnDefinitions>
@@ -61,68 +76,27 @@
                     <ColumnDefinition Width="0.75*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.4*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" 
-                   Text="Фильтр" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}"/>
-                <!--<TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" 
-                   Text="Картридж 4 к" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}"/>
-                <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" 
-                   Text="Картридж 2" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}"/>-->
-                <ComboBox FontSize="10" Grid.Column="1" Grid.Row="0" Height="50" Style="{StaticResource MaterialDesignFilledComboBox}" mt:HintAssist.Hint="Выберите фильтр">
-                    <ComboBoxItem Content="Item 1" />
-                    <ComboBoxItem Content="Item 2" />
-                    <ComboBoxItem Content="Item 3" />
-                </ComboBox>
-                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Header="Картридж 4 к" Style="{StaticResource MaterialDesignGroupBox}"
+                <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <GroupBox Header="Картриджи" Style="{StaticResource MaterialDesignGroupBox}"
                         Margin="16" mt:ElevationAssist.Elevation="Dp6" BorderThickness="1">
-                            <ItemsControl Background="AliceBlue" Grid.Column="1" Grid.Row="1" Grid.IsSharedSizeScope="True">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type vm:MainWindowVIewModel}">
-                                        <Border x:Name="Border" Padding="8">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition SharedSizeGroup="Checkerz" />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <CheckBox VerticalAlignment="Center" />
-                                                <StackPanel Margin="8 0 0 0" Grid.Column="1">
-                                                    <TextBlock FontWeight="Bold" />
-                                                    <TextBlock />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Border>
-                                        <DataTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
-                                            </DataTrigger>
-                                        </DataTemplate.Triggers>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Картридж 2" Style="{StaticResource MaterialDesignGroupBox}"
-                        Margin="16" mt:ElevationAssist.Elevation="Dp6" BorderThickness="1">
-                        <ItemsControl Background="AliceBlue" Grid.Column="1" Grid.Row="2" Grid.IsSharedSizeScope="True">
+                        <ItemsControl Background="AliceBlue" Grid.Column="1" 
+                                      ItemsSource="{Binding KartrijCollection}"
+                                      Grid.Row="1" Grid.IsSharedSizeScope="True">
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:MainWindowVIewModel}">
+                                <DataTemplate>
                                     <Border x:Name="Border" Padding="8">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition SharedSizeGroup="Checkerz" />
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <CheckBox VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" />
                                             <StackPanel Margin="8 0 0 0" Grid.Column="1">
-                                                <TextBlock FontWeight="Bold" />
-                                                <TextBlock />
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                                <TextBlock  Text="{Binding Srok,StringFormat=Срок: 0}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -140,7 +114,7 @@
             <Button Grid.Column="1" Background="Red" Grid.Row="2" Width="300"
                 Content="Отмена"  Click="Close"/>
             <Button Grid.Column="3" Grid.Row="2" Width="300" x:Name="SaveAndChange"
-                Content="Сохранить" Command="{Binding Create}" Click="Button_Click"/>
+                Content="Сохранить" Command="{Binding CreateClientCommand}" Click="Button_Click"/>
         </Grid>
 
     </Grid>

@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistrationClinik"
-        mc:Ignorable="d" KeyUp="Window_KeyUp"
+        mc:Ignorable="d"
         xmlns:mt="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowVIewModel}"
-        Title="MainWindow" Height="1080" Width="1920" 
+        Title="MainWindow" Height="1080" Width="1920"
         WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -32,21 +32,22 @@
                     Background="Red" Foreground="White" Click="Close" Padding="0 0 0 3"/>
             <Button Content="⬜" Height="30"  VerticalAlignment="Center" HorizontalAlignment="Right"
                     Grid.ColumnSpan="3" Width="30" FontSize="22" Margin="0 0 60 0"
-                    Background="White" Foreground="Black" Click="Minimize" Padding="0 0 0 5"/>
+                    Background="White" Foreground="Black" Click="Normal" Padding="0 0 0 5"/>
             <Button Content="___" Height="30"  VerticalAlignment="Center" HorizontalAlignment="Right"
                     Grid.ColumnSpan="3" Width="30" FontSize="18" Margin="0 0 100 0"
                     Background="White" Foreground="Black" Click="Minimize" Padding="0 0 0 5"/>
             <Grid HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.4*" />
                 </Grid.ColumnDefinitions>
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" mt:HintAssist.Hint="Поиск" 
                          Width="500" Margin="10 0 10 0" Height="40" Padding="20 0 0 0" 
                          HorizontalAlignment="Center" VerticalContentAlignment="Center" 
-                         VerticalAlignment="Center" FontSize="18"/>
-                <Button Grid.Column="2" Width="100" Height="40" Content="поиск" Command="{Binding Create}"/>
-                
+                         VerticalAlignment="Center" FontSize="18" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="1" Width="100" Height="40" Content="Поиск" Command="{Binding SearchCommand}"/>
+                <Button Grid.Column="2" Width="100" Margin="10 0 0 0" Height="40" Content="Сбросить" Command="{Binding ClearCommand}"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Button Grid.Column="1" Height="40"  Width="350" Content="Добавить" Padding="0" Click="showAddPage"/>
@@ -58,17 +59,59 @@
         </Grid>
         <Grid Grid.Row="1">
             <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
-                      RowBackground="#FFF1F1F1" AlternatingRowBackground="White" 
-                      AutoGenerateColumns="False" FontSize="16" BorderThickness="0" IsReadOnly="True">
+                      RowBackground="White" BorderThickness="0" IsReadOnly="True"
+                      AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Binding="{Binding Id}" Width="0.2*"/>
-                    <DataGridTextColumn Header="Ф.И.О." Binding="{Binding Name}" Width="0.7*"/>
-                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="0.4*"/>
-                    <DataGridTextColumn Header="Адресс" Binding="{Binding Adres}" Width="0.6*"/>
-                    <DataGridTextColumn Header="Дата утановки" Binding="{Binding StartTimer}" Width="0.3*"/>
-                    <DataGridTextColumn Header="Окнчание срока" Binding="{Binding EndTimer}" Width="0.3*"/>
-                    <DataGridTextColumn Header="Модель" Binding="{Binding Model.Name}" Width="0.4*"/>
-                    <DataGridTemplateColumn Header="Изменить"  Width="120">
+                    <DataGridTemplateColumn Header="№"  Width="0.2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  Header="Ф.И.О." Width="0.7*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Номер телефона" Width="0.6*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" Foreground="{Binding RowBackground}" Text="{Binding PhoneNumber}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  Header="Адресс" Width="0.6*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Adres}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Окончание срока" Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Модель" Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding ModelName}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Изменить"  Width="140">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Изменить"/>

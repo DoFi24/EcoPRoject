@@ -1,8 +1,8 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
+using System;
 using System.Collections.ObjectModel;
-using System.Data.Common;
-using System.Windows;
+using System.Linq;
 using System.Windows.Input;
 
 namespace RegistrationClinik.ViewModels
@@ -11,63 +11,89 @@ namespace RegistrationClinik.ViewModels
     {
         public MainWindowVIewModel()
         {
-            Create = new LambdaCommand(CreateMethod, CanCloseApplicationExecate);
+            SearchCommand = new LambdaCommand(SearchCommandExecute, CanSearchCommandExecuted);
+            ClearCommand = new LambdaCommand(ClearCommandExecute, CanClearCommandExecuted);
             GetAllData();
         }
 
+
         #region Props
 
-        public ObservableCollection<DBTable>? dBTables = new ObservableCollection<DBTable>();
-        public ObservableCollection<DBTable>? DBTables
+        private ObservableCollection<ShowTableModel> dBTables = new ObservableCollection<ShowTableModel>();
+        public ObservableCollection<ShowTableModel> DBTables
         {
-            get
-            {
-                return dBTables;
-            }
+            get => dBTables;
             set
             {
                 Set(ref dBTables, value);
             }
         }
 
-        private DBTable? item = new DBTable();
-        public DBTable? Item
+        private string searchText = "";
+        public string SearchText
         {
-            get { return item; }
-            set { Set(ref item, value); }
-        }
-
-        private string? buttonName = "Сохранить";
-        public string? ButtonName
-        {
-            get { return buttonName; }
+            get => searchText;
             set
             {
-                Set(ref buttonName, value);
+                Set(ref searchText, value);
             }
         }
+        public ICommand SearchCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
+        
+        private bool CanSearchCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
+        private void SearchCommandExecute(object obj)
+        {
+            DBTables = new ObservableCollection<ShowTableModel>(DBTables.Where(s => s.Name.Contains(searchText)));
+        }
+        private bool CanClearCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
+        private void ClearCommandExecute(object obj)
+        {
+            GetAllData();
+            searchText = string.Empty;
+        }
+
         #endregion
-
-        public ICommand Create { get; set; }
-        public void CreateMethod(object o)
-        {
-            using (ApplicationConnect db = new ApplicationConnect())
-            {
-                db.DBTable.Add(new DBTable());
-
-                db.SaveChanges();
-                GetAllData();
-                MessageBox.Show("Данные успешно сохранены");
-            }
-        }
-
-        public bool CanCloseApplicationExecate(object o)
-        {
-            return true;
-        }
         public void GetAllData()
         {
-
+            using ApplicationConnect db = new();
+            var query = from d in db.DBTable
+                        join kl in db.DBKartrigList on d.Id equals kl.TableId
+                        select new
+                        {
+                            d,
+                            kl
+                        } 
+                        into t1
+                        group t1 by t1.kl.TableId into g
+                        select new ShowTableModel
+                        {
+                            Id = g.FirstOrDefault().d.Id,
+                            Adres = g.FirstOrDefault().d.Adres,
+                            StartTimer = g.FirstOrDefault().kl.EndDate,
+                            EndTimer = g.OrderBy(s=>s.kl.EndDate).FirstOrDefault().kl.EndDate,
+                            IsActive = g.FirstOrDefault().d.IsActive,
+                            Name = g.FirstOrDefault().d.Name,
+                            PhoneNumber = g.FirstOrDefault().d.PhoneNumber,
+                            ModelName = GetModelName(g.FirstOrDefault().d.ModelId),
+                            RowBackground = GetColorOfRow(g.OrderBy(s => s.kl.EndDate).FirstOrDefault().kl.EndDate),
+                        }
+                        ;
+            DBTables = new ObservableCollection<ShowTableModel>(query);
+        }
+        public static string GetModelName(int id) 
+        {
+            using ApplicationConnect db = new();
+            return db.DBFilter.FirstOrDefault(s=>s.Id == id)?.Name ?? "Не найдено!";
+        }
+        public static string GetColorOfRow(DateTime date)
+        {
+            if ((date.Date - DateTime.Now).Days < 10)
+                return "Red";
+            else if ((date.Date - DateTime.Now).Days < 30)
+                return "DarkOrange";
+            else
+                return "Black";
         }
     }
 }
