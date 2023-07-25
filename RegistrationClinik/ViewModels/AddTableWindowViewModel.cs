@@ -92,7 +92,6 @@ namespace RegistrationClinik.ViewModels
 
         #region Commands
         public ICommand CreateClientCommand { get; set; }
-
         private bool CanCreateClientCommandExecuted(object arg)
         {
             if (clientSelectedFilter is null && clientSelectedFilter == new DBFilter())

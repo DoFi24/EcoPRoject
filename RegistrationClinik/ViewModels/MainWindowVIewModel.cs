@@ -1,5 +1,6 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
+using RegistrationClinik.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace RegistrationClinik.ViewModels
         {
             SearchCommand = new LambdaCommand(SearchCommandExecute, CanSearchCommandExecuted);
             ClearCommand = new LambdaCommand(ClearCommandExecute, CanClearCommandExecuted);
+            OpenInfoCommand = new LambdaCommand(OpenInfoCommandExecute, CanOpenInfoCommandExecuted);
             GetAllData();
         }
-
 
         #region Props
 
@@ -29,6 +30,16 @@ namespace RegistrationClinik.ViewModels
             }
         }
 
+        private ShowTableModel selectedClient = new();
+        public ShowTableModel SelectedClient
+        {
+            get => selectedClient;
+            set
+            {
+                Set(ref selectedClient, value);
+            }
+        }
+        
         private string searchText = "";
         public string SearchText
         {
@@ -40,7 +51,8 @@ namespace RegistrationClinik.ViewModels
         }
         public ICommand SearchCommand { get; set; }
         public ICommand ClearCommand { get; set; }
-        
+        public ICommand OpenInfoCommand { get; set; }
+
         private bool CanSearchCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
         private void SearchCommandExecute(object obj)
         {
@@ -52,6 +64,13 @@ namespace RegistrationClinik.ViewModels
             GetAllData();
             searchText = string.Empty;
         }
+        private bool CanOpenInfoCommandExecuted(object arg) => true;
+
+        private void OpenInfoCommandExecute(object obj)
+        {
+            new AllInformationWindow(SelectedClient.Id).Show();
+        }
+
 
         #endregion
         public void GetAllData()

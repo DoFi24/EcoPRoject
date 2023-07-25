@@ -60,6 +60,7 @@
         <Grid Grid.Row="1">
             <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
                       RowBackground="White" BorderThickness="0" IsReadOnly="True"
+                      SelectedItem="{Binding SelectedClient}"
                       AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="№"  Width="0.2*">
@@ -114,7 +115,9 @@
                     <DataGridTemplateColumn Header="Изменить"  Width="140">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Изменить"/>
+                                <Button Command="{Binding DataContext.OpenInfoCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, 
+                                    AncestorType={x:Type DataGrid}}}" Content="Изменить"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
