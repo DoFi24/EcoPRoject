@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistrationClinik.Views"
+        xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:AllInformationWindowViewModel}"
         mc:Ignorable="d"
         Title="AllInformationWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <DataGrid Height="200" ItemsSource="{Binding KartrijCollection}"/>
+            <TextBlock Text="{Binding ClientModel.Name}"/>
+            <TextBlock Text="{Binding ClientModel.Adres}"/>
+            <TextBlock Text="{Binding ClientModel.PhoneNumber}"/>
+            <TextBlock Text="{Binding FilterName}"/>
+        </StackPanel>
     </Grid>
 </Window>

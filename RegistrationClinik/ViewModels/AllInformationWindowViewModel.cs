@@ -16,6 +16,10 @@ namespace RegistrationClinik.ViewModels
         {
             GetAllInfo(_clientId);
         }
+        public AllInformationWindowViewModel()
+        {
+
+        }
 
         //тут храниться инфо о картрижах клиента
         private ObservableCollection<DBKartrigList> kartrijCollection = new();
