@@ -60,7 +60,7 @@
         <Grid Grid.Row="1">
             <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
                       RowBackground="White" BorderThickness="0" IsReadOnly="True"
-                      SelectedItem="{Binding SelectedClient}"
+                      SelectedItem="{Binding SelectedClient,UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="№"  Width="0.2*">
