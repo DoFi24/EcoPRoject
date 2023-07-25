@@ -45,22 +45,37 @@
                          Width="500" Margin="10 0 10 0" Height="40" Padding="20 0 0 0" 
                          HorizontalAlignment="Center" VerticalContentAlignment="Center" 
                          VerticalAlignment="Center" FontSize="18"/>
-                <Button Grid.Column="2" Width="100" Height="40" Content="поиск" Command="{Binding}"/>
+                <Button Grid.Column="2" Width="100" Height="40" Content="поиск" Command="{Binding Create}"/>
                 
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Button Grid.Column="1" Height="40"  Width="350" Content="Добавить" Padding="0" Click="showAddPage"/>
             </Grid>
             <StackPanel HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal" Grid.Column="2">
-                <Button Grid.Column="1" Width="150" Margin="10 0 10 0" Content="Добавить" Padding="0" Click="showAddPage"/>
-                <Button Grid.Column="1" Width="150" Margin="10 0 10 0" Content="Добавить" Padding="0" Click="showAddPage"/>
+                <Button Grid.Column="1" Width="150" Margin="10 0 10 0" Content="Добавить фильтер" Padding="0" Click="showAddFilter" Cursor="Hand"/>
+                <Button Grid.Column="1" Width="150" Margin="10 0 10 0" Content="Добавить картридж" Padding="0" Click="showAddKartij"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <DataGrid ItemsSource="{Binding DBTables,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" 
-                      SelectedItem="{Binding Item}"
-                      HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray" AlternatingRowBackground="White" 
+            <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
+                      RowBackground="#FFF1F1F1" AlternatingRowBackground="White" 
                       AutoGenerateColumns="False" FontSize="16" BorderThickness="0" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding Id}" Width="0.2*"/>
+                    <DataGridTextColumn Header="Ф.И.О." Binding="{Binding Name}" Width="0.7*"/>
+                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="0.4*"/>
+                    <DataGridTextColumn Header="Адресс" Binding="{Binding Adres}" Width="0.6*"/>
+                    <DataGridTextColumn Header="Дата утановки" Binding="{Binding StartTimer}" Width="0.3*"/>
+                    <DataGridTextColumn Header="Окнчание срока" Binding="{Binding EndTimer}" Width="0.3*"/>
+                    <DataGridTextColumn Header="Модель" Binding="{Binding Model.Name}" Width="0.4*"/>
+                    <DataGridTemplateColumn Header="Изменить"  Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Изменить"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
     </Grid>

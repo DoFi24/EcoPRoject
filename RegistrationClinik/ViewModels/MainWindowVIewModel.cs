@@ -21,8 +21,8 @@ namespace RegistrationClinik.ViewModels
 
         #region Props
 
-        public ObservableCollection<DBTable>? dBTables = new ObservableCollection<DBTable>();
-        public ObservableCollection<DBTable>? DBTables
+        private ObservableCollection<DBTable> dBTables = new ObservableCollection<DBTable>();
+        public ObservableCollection<DBTable> DBTables
         {
             get
             {
@@ -69,7 +69,45 @@ namespace RegistrationClinik.ViewModels
         }
         public void GetAllData()
         {
-            
+            dBTables = new ObservableCollection<DBTable>
+            {
+                new DBTable
+                {
+                    Id = 1,
+                    StartTimer = DateTime.Now,
+                    EndTimer = DateTime.Now.AddDays(240),
+                    Adres = "Ош",
+                    IsActive = 1,
+                    Model = new DBFilter{Id = 1,Name = "1"},
+                    Name = "Арслеан",
+                    PhoneNumber = "88128218"
+
+                },
+                 new DBTable
+                {
+                    Id = 2,
+                    StartTimer = DateTime.Now,
+                    EndTimer = DateTime.Now.AddDays(240),
+                    Adres = "Ош",
+                    IsActive = 1,
+                    Model = new DBFilter{Id = 1,Name = "1"},
+                    Name = "Арслеан",
+                    PhoneNumber = "88128218"
+
+                },
+                  new DBTable
+                {
+                    Id = 3,
+                    StartTimer = DateTime.Now,
+                    EndTimer = DateTime.Now.AddDays(240),
+                    Adres = "Ош",
+                    IsActive = 1,
+                    Model = new DBFilter{Id = 1,Name = "1"},
+                    Name = "Арслеан",
+                    PhoneNumber = "88128218"
+
+                },
+            };
         }
     }
 }

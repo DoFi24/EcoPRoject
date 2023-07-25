@@ -46,5 +46,15 @@ namespace RegistrationClinik
         {
 
         }
+
+        private void showAddKartij(object sender, RoutedEventArgs e)
+        {
+            new AddKartij().Show();
+        }
+
+        private void showAddFilter(object sender, RoutedEventArgs e)
+        {
+            new AddFilters().Show();
+        }
     }
 }
