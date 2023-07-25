@@ -71,7 +71,6 @@ namespace RegistrationClinik.ViewModels
             new AllInformationWindow(SelectedClient.Id).Show();
         }
 
-
         #endregion
         public void GetAllData()
         {
