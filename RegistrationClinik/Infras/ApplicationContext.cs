@@ -6,7 +6,10 @@ namespace RegistrationClinik.Infras
 {
     public class ApplicationConnect : DbContext
     {
-
+        public DbSet<DBFilter> DBFilter { get; set; }
+        public DbSet<DBKartrij> DBKartrij { get; set; }
+        public DbSet<DBKartrigList> DBKartrigList { get; set; }
+        public DbSet<DBTable> DBTable { get; set; }
 
         public ApplicationConnect()
         {

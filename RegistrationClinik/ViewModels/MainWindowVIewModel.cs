@@ -1,11 +1,7 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.Xml;
+using System.Data.Common;
 using System.Windows;
 using System.Windows.Input;
 
@@ -57,6 +53,8 @@ namespace RegistrationClinik.ViewModels
         {
             using (ApplicationConnect db = new ApplicationConnect())
             {
+                db.DBTable.Add(new DBTable());
+
                 db.SaveChanges();
                 GetAllData();
                 MessageBox.Show("Данные успешно сохранены");
@@ -69,7 +67,7 @@ namespace RegistrationClinik.ViewModels
         }
         public void GetAllData()
         {
-            
+
         }
     }
 }
