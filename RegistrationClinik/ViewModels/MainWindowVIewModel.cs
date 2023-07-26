@@ -56,7 +56,7 @@ namespace RegistrationClinik.ViewModels
         private bool CanSearchCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
         private void SearchCommandExecute(object obj)
         {
-            DBTables = new ObservableCollection<ShowTableModel>(DBTables.Where(s => s.Name.Contains(searchText)));
+            DBTables = new ObservableCollection<ShowTableModel>(DBTables.Where(s => s.Name.Contains(searchText)).OrderBy(s => s.EndTimer));
         }
         private bool CanClearCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
         private void ClearCommandExecute(object obj)
@@ -68,7 +68,7 @@ namespace RegistrationClinik.ViewModels
 
         private void OpenInfoCommandExecute(object obj)
         {
-            new AllInformationWindow(SelectedClient.Id).Show();
+            new AllInformationWindow(this,SelectedClient.Id).Show();
         }
 
         #endregion
@@ -98,7 +98,7 @@ namespace RegistrationClinik.ViewModels
                             RowBackground = GetColorOfRow(g.OrderBy(s => s.kl.EndDate).FirstOrDefault().kl.EndDate),
                         }
                         ;
-            DBTables = new ObservableCollection<ShowTableModel>(query);
+            DBTables = new ObservableCollection<ShowTableModel>(query.OrderBy(s => s.EndTimer));
         }
         public static string GetModelName(int id) 
         {

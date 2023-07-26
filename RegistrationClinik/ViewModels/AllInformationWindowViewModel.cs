@@ -1,5 +1,6 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
+using RegistrationClinik.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,18 +8,33 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RegistrationClinik.ViewModels
 {
     public class AllInformationWindowViewModel : BaseViewModel
     {
+        private readonly int clientId;
         public AllInformationWindowViewModel(int _clientId)
         {
-            GetAllInfo(_clientId);
+            ChangeKartrijCommand = new LambdaCommand(ChangeKartrijCommandExcecute, CanChangeKartrijCommandExcecuted);
+            clientId = _clientId;
+            GetAllInfo();
         }
+
         public AllInformationWindowViewModel()
         {
 
+        }
+        public ICommand ChangeKartrijCommand { get; set; }
+        private bool CanChangeKartrijCommandExcecuted(object arg)
+        {
+            return true;
+        }
+
+        private void ChangeKartrijCommandExcecute(object obj)
+        {
+            new ChangeKartrijWindow(this,SelectedKartrij.Id).ShowDialog();
         }
 
         //тут храниться инфо о картрижах клиента
@@ -44,7 +60,16 @@ namespace RegistrationClinik.ViewModels
                 Set(ref clientModel, value);
             }
         }
-
+        private KartrijInfoModel selectedKartrij = new();
+        public KartrijInfoModel SelectedKartrij
+        {
+            get => selectedKartrij;
+            set
+            {
+                Set(ref selectedKartrij, value);
+            }
+        }
+        
         //тут храниться название модели фильтра
         private string filterName = string.Empty;
         public string FilterName
@@ -56,12 +81,12 @@ namespace RegistrationClinik.ViewModels
             }
         }
         //тут берем данные клиента и его картриджы
-        private void GetAllInfo(int Id)
+        public void GetAllInfo()
         {
             KartrijCollection = new ObservableCollection<KartrijInfoModel>();
             using ApplicationConnect db = new();
-            ClientModel = db.DBTable.FirstOrDefault(s => s.Id == Id);
-            var result = db.DBKartrigList.Where(s => s.TableId == Id).ToArray();
+            ClientModel = db.DBTable.FirstOrDefault(s => s.Id == clientId);
+            var result = db.DBKartrigList.Where(s => s.TableId == clientId).ToArray();
             for (int i = 0; i < result.Length; i++)
                 KartrijCollection.Add(new KartrijInfoModel
                 {

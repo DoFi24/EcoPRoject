@@ -132,7 +132,7 @@
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.OpenInfoCommand, 
                                     RelativeSource={RelativeSource FindAncestor, 
-                                    AncestorType={x:Type DataGrid}}}" Content="Изменить" Click="editPage"/>
+                                    AncestorType={x:Type DataGrid}}}" Content="Изменить"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

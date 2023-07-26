@@ -49,10 +49,5 @@ namespace RegistrationClinik
         {
             this.DragMove();
         }
-
-        private void editPage(object sender, RoutedEventArgs e)
-        {
-            new EditPage();
-        }
     }
 }

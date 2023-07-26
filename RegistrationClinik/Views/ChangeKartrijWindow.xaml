@@ -1,0 +1,35 @@
+﻿<Window x:Class="RegistrationClinik.Views.ChangeKartrijWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistrationClinik.Views"
+        xmlns:mod="clr-namespace:RegistrationClinik.Models"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" 
+        xmlns:mt="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="ChangeKartrijWindow" Height="200" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ComboBox FontSize="11" x:Name="ComboBox1" Margin="10"
+                  Height="50" Style="{StaticResource MaterialDesignFilledComboBox}"
+                  mt:HintAssist.Hint="Выберите картридж для замены">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="mod:DBKartrij">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextAlignment="Left" Text="{Binding Name}" FontSize="16"/>
+                        <TextBlock Grid.Column="1" TextAlignment="Left" Text="{Binding Srok,StringFormat=Срок: 0}" FontSize="16"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 40 0" Width="130" Click="Change" Content="Изменить"/>
+        <Button Grid.Row="1" Background="Red" HorizontalAlignment="Left" Margin="40 0 0 0" Width="130" Click="CloseWindow" Content="Отмена"/>
+    </Grid>
+</Window>

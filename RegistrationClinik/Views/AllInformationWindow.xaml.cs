@@ -20,9 +20,11 @@ namespace RegistrationClinik.Views
     /// </summary>
     public partial class AllInformationWindow : Window
     {
-        public AllInformationWindow(int id)
+        private MainWindowVIewModel main;
+        public AllInformationWindow(MainWindowVIewModel _main,int id)
         {
             InitializeComponent();
+            main = _main;
             DataContext = new AllInformationWindowViewModel(id);
         }
 
@@ -34,6 +36,11 @@ namespace RegistrationClinik.Views
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            main.GetAllData();
         }
     }
 }
