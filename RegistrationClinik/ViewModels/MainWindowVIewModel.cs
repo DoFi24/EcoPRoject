@@ -89,7 +89,7 @@ namespace RegistrationClinik.ViewModels
                         {
                             Id = g.FirstOrDefault().d.Id,
                             Adres = g.FirstOrDefault().d.Adres,
-                            StartTimer = g.FirstOrDefault().kl.EndDate,
+                            StartTimer = g.FirstOrDefault().kl.StartDate,
                             EndTimer = g.OrderBy(s=>s.kl.EndDate).FirstOrDefault().kl.EndDate,
                             IsActive = g.FirstOrDefault().d.IsActive,
                             Name = g.FirstOrDefault().d.Name,
