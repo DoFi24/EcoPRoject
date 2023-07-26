@@ -61,54 +61,69 @@
             <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
                       RowBackground="White" BorderThickness="0" IsReadOnly="True"
                       SelectedItem="{Binding SelectedClient,UpdateSourceTrigger=PropertyChanged}"
+                      CellStyle="{x:Null}"
                       AutoGenerateColumns="False" FontSize="16">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="№"  Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Id}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding Id}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn  Header="Ф.И.О." Width="0.7*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Name}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Номер телефона" Width="0.6*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" Foreground="{Binding RowBackground}" Text="{Binding PhoneNumber}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding PhoneNumber}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn  Header="Адресс" Width="0.6*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding Adres}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding Adres}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Окончание срока" Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Модель" Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{Binding RowBackground}" Text="{Binding ModelName}"/>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock Text="{Binding ModelName}"/>
+                                </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

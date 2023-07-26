@@ -72,6 +72,7 @@ namespace RegistrationClinik.ViewModels
         }
 
         #endregion
+
         public void GetAllData()
         {
             using ApplicationConnect db = new();
@@ -111,7 +112,7 @@ namespace RegistrationClinik.ViewModels
             else if ((date.Date - DateTime.Now).Days < 30)
                 return "DarkOrange";
             else
-                return "Black";
+                return "White";
         }
     }
 }
