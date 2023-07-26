@@ -7,51 +7,82 @@
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:AllInformationWindowViewModel}"
         mc:Ignorable="d"
-        Title="AllInformationWindow" Height="450" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown">
+        Title="AllInformationWindow" Height="450" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown"  Foreground="#FF0058E8">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.1*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.2*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
-        <StackPanel>
-        </StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*" />
-                <ColumnDefinition Width="0.8*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.8*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.1*" />
-            </Grid.ColumnDefinitions>
+        <TextBlock Text="Редакторвание" Grid.Column="1" Grid.ColumnSpan="3" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+        <Grid Grid.Column="1" Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Просмотр" Grid.Column="2" Grid.ColumnSpan="2" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" Text="Ф.И.О:" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" Text="Адресс:" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" Text="Телефон номер:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" Text="Фильтр:" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-
-            <TextBlock FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Text="{Binding ClientModel.Name}" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ClientModel.Adres}" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Text="{Binding ClientModel.PhoneNumber}" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-            <TextBlock FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="2" Text="{Binding FilterName}" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="0" Text="Клиент:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="1" Text="Адресс:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="2" Text="Телефон:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="3" Text="Модель:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
         </Grid>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding KartrijCollection}" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" IsReadOnly="True" BorderThickness="0">
+        <Grid Grid.Column="2" Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding ClientModel.Name}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="1" Text="{Binding ClientModel.Adres}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="2" Text="{Binding ClientModel.PhoneNumber}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+            <TextBlock Grid.Row="3" Text="{Binding FilterName}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+        </Grid>
+        <Grid Grid.Column="3" Grid.Row="1">
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding KartrijCollection}" Grid.Row="1" Grid.IsSharedSizeScope="True" FontSize="18">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="Border" Padding="8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Checkerz" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" />
+                                <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                    <!--<TextBlock  Text="{Binding Srok,StringFormat=Срок: 0}" />-->
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Button Background="Red" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Content="Закрыть" Width="300" HorizontalAlignment="Left" Click="close"/>
+        <Button Grid.Column="3" Grid.Row="2" Content="Обновить" Width="300"/>
+
+        <!--<DataGrid Grid.Row="2" ItemsSource="{Binding KartrijCollection}" AutoGenerateColumns="False" FontSize="16" CanUserAddRows="False" IsReadOnly="True" BorderThickness="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Width="0.3*" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Имя Картриджа" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Дата установки" Width="0.8*" Binding="{Binding StartDate}"/>
                 <DataGridTextColumn Header="Дата окончание" Width="0.8*" Binding="{Binding EndDate}"/>
             </DataGrid.Columns>
-        </DataGrid>
-        <Button Margin="50 0" Width="300" Grid.Row="3" Content="Закрыть" HorizontalAlignment="Left" Background="Red" Click="close"/>
-        <Button Margin="40 0" Width="300" Grid.Row="3" Content="Изменить" HorizontalAlignment="Right"/>
+        </DataGrid>-->
     </Grid>
 </Window>
