@@ -50,8 +50,7 @@
                 <GroupBox Header="Картриджи" Style="{StaticResource MaterialDesignGroupBox}"
                         Margin="5" mt:ElevationAssist.Elevation="Dp6" BorderThickness="1">
                     <ListBox ItemsSource="{Binding KartrijCollection,UpdateSourceTrigger=PropertyChanged}"
-                             SelectedItem="{Binding SelectedKartrij,UpdateSourceTrigger=PropertyChanged}"
-                                Background="AliceBlue">
+                             SelectedItem="{Binding SelectedKartrij,UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Width="320" BorderBrush="Black" BorderThickness="0 0 0 1">
