@@ -68,7 +68,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding Id}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Id}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -77,7 +77,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding Name}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Name}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -86,7 +86,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" VerticalAlignment="Center" Text="{Binding PhoneNumber}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black"  Text="{Binding PhoneNumber}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -95,7 +95,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding Adres}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Adres}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -104,7 +104,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -113,7 +113,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -122,7 +122,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock Foreground="Black" Text="{Binding ModelName}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding ModelName}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
