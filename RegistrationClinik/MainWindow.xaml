@@ -9,7 +9,7 @@
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowVIewModel}"
         Title="MainWindow" Height="1080" Width="1920"
-        WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize">
+        WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />
