@@ -18,6 +18,7 @@ namespace RegistrationClinik.ViewModels
         public AllInformationWindowViewModel(int _clientId)
         {
             ChangeKartrijCommand = new LambdaCommand(ChangeKartrijCommandExcecute, CanChangeKartrijCommandExcecuted);
+            ChangeClientCommand = new LambdaCommand(ChangeClientCommandExcecute, CanChangeClientCommandExcecuted);
             clientId = _clientId;
             GetAllInfo();
         }
@@ -27,6 +28,7 @@ namespace RegistrationClinik.ViewModels
 
         }
         public ICommand ChangeKartrijCommand { get; set; }
+        public ICommand ChangeClientCommand { get; set; }
         private bool CanChangeKartrijCommandExcecuted(object arg)
         {
             return true;
@@ -35,6 +37,16 @@ namespace RegistrationClinik.ViewModels
         private void ChangeKartrijCommandExcecute(object obj)
         {
             new ChangeKartrijWindow(this,SelectedKartrij.Id).ShowDialog();
+        }
+        private bool CanChangeClientCommandExcecuted(object arg)
+        {
+            return true;
+        }
+
+        private void ChangeClientCommandExcecute(object obj)
+        {
+            using ApplicationConnect db = new();
+            var result = db.DBTable.FirstOrDefault(s=>s.Id == clientId);
         }
 
         //тут храниться инфо о картрижах клиента
