@@ -16,7 +16,7 @@ namespace RegistrationClinik
             viewModel = new MainWindowVIewModel();
             DataContext = viewModel;
         } 
-        private void showAddPage(object sender, RoutedEventArgs e)
+        private void ShowAddPage(object sender, RoutedEventArgs e)
         {
             new regClient(viewModel).Show();
         }
@@ -30,12 +30,12 @@ namespace RegistrationClinik
             this.WindowState = WindowState.Minimized;
         }
 
-        private void showAddKartij(object sender, RoutedEventArgs e)
+        private void ShowAddKartij(object sender, RoutedEventArgs e)
         {
             new AddKartij().Show();
         }
 
-        private void showAddFilter(object sender, RoutedEventArgs e)
+        private void ShowAddFilter(object sender, RoutedEventArgs e)
         {
             new AddFilters().Show();
         }

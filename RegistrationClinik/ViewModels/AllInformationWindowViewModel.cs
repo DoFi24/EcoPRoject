@@ -22,8 +22,8 @@ namespace RegistrationClinik.ViewModels
         }
 
         //тут храниться инфо о картрижах клиента
-        private ObservableCollection<DBKartrigList> kartrijCollection = new();
-        public ObservableCollection<DBKartrigList> KartrijCollection
+        private ObservableCollection<KartrijInfoModel> kartrijCollection = new();
+        public ObservableCollection<KartrijInfoModel> KartrijCollection
         {
             get => kartrijCollection;
             set
@@ -58,16 +58,31 @@ namespace RegistrationClinik.ViewModels
         //тут берем данные клиента и его картриджы
         private void GetAllInfo(int Id)
         {
+            KartrijCollection = new ObservableCollection<KartrijInfoModel>();
             using ApplicationConnect db = new();
             ClientModel = db.DBTable.FirstOrDefault(s => s.Id == Id);
-            KartrijCollection = new ObservableCollection<DBKartrigList>(db.DBKartrigList.Where(s => s.TableId == Id));
+            var result = db.DBKartrigList.Where(s => s.TableId == Id).ToArray();
+            for (int i = 0; i < result.Length; i++)
+                KartrijCollection.Add(new KartrijInfoModel
+                {
+                    Id = result[i].Id,
+                    Number = i+1,
+                    StartDate = result[i].StartDate,
+                    EndDate = result[i].EndDate,
+                    Name = GetKartrijName(result[i].KartrijId)
+                });
         }
-        
+
         //тут берем название модели фильтра
         private void GetFilterName(int Id)
         {
             using ApplicationConnect db = new();
             FilterName = db.DBFilter.FirstOrDefault(s => s.Id == Id).Name;
+        }
+        private static string GetKartrijName(int Id)
+        {
+            using ApplicationConnect db = new();
+            return db.DBKartrij.FirstOrDefault(s => s.Id == Id).Name;
         }
     }
 }
