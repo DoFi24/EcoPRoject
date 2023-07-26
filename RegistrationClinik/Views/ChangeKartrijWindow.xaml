@@ -7,13 +7,15 @@
         xmlns:mod="clr-namespace:RegistrationClinik.Models"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" 
         xmlns:mt="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ChangeKartrijWindow" Height="200" Width="400">
+        Title="ChangeKartrijWindow" Height="200" Width="400" WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.3*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="0.6*" />
         </Grid.RowDefinitions>
-        <ComboBox FontSize="11" x:Name="ComboBox1" Margin="10"
+        <TextBlock Text="Выбор картриджа" Grid.Column="1" Grid.ColumnSpan="3" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+        <ComboBox Grid.Row="1" FontSize="11" x:Name="ComboBox1" Margin="10"
                   Height="50" Style="{StaticResource MaterialDesignFilledComboBox}"
                   mt:HintAssist.Hint="Выберите картридж для замены">
             <ComboBox.ItemTemplate>
@@ -29,7 +31,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 40 0" Width="130" Click="Change" Content="Изменить"/>
-        <Button Grid.Row="1" Background="Red" HorizontalAlignment="Left" Margin="40 0 0 0" Width="130" Click="CloseWindow" Content="Отмена"/>
+        <Button Grid.Row="2" HorizontalAlignment="Right" Margin="0 0 40 0" Width="130" Click="Change" Content="Изменить"/>
+        <Button Grid.Row="2" Background="Red" HorizontalAlignment="Left" Margin="40 0 0 0" Width="130" Click="CloseWindow" Content="Отмена"/>
     </Grid>
 </Window>
