@@ -9,7 +9,7 @@
         d:DataContext="{d:DesignInstance Type=vm:AddTableWindowViewModel}"
         mc:Ignorable="d"
         xmlns:l ="clr-namespace:RegistrationClinik.ViewModels"
-        Title="regClient" Height="500" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True">
+        Title="regClient" Height="500" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" ResizeMode="CanResize" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" />

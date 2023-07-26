@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:KartrijWindowViewModel}"
         mc:Ignorable="d"
-        Title="AddKartij" Height="450" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True">
+        Title="AddKartij" Height="450" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />

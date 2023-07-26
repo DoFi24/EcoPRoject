@@ -17,5 +17,10 @@ namespace RegistrationClinik.Views
         {
             this.Close();
         }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }
