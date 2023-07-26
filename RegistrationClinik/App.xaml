@@ -13,21 +13,5 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        <!--<Style x:Key="textbl" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-        <Style x:Key="date" TargetType="DatePicker">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-        <Style x:Key="textbox" TargetType="TextBox">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Width" Value="320"/>
-        </Style>-->
     </Application.Resources>
 </Application>

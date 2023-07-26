@@ -48,7 +48,7 @@
                 <DataGridTextColumn Header="№" Width="0.3*" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Имя Картриджа" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Дата установки" Width="0.8*" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="Дата окаончание" Width="0.8*" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Дата окончание" Width="0.8*" Binding="{Binding EndDate}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Margin="50 0" Width="300" Grid.Row="3" Content="Закрыть" HorizontalAlignment="Left" Background="Red" Click="close"/>
