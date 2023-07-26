@@ -47,6 +47,7 @@ namespace RegistrationClinik.ViewModels
         {
             using ApplicationConnect db = new();
             var result = db.DBTable.FirstOrDefault(s=>s.Id == clientId);
+            result.Name = 
         }
 
         //тут храниться инфо о картрижах клиента
