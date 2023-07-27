@@ -16,11 +16,13 @@ namespace RegistrationClinik.ViewModels
     public class AllInformationWindowViewModel : BaseViewModel
     {
         private readonly int clientId;
-        public AllInformationWindowViewModel(int _clientId)
+        private AllInformationWindow window;
+        public AllInformationWindowViewModel(int _clientId,AllInformationWindow _window)
         {
             ChangeKartrijCommand = new LambdaCommand(ChangeKartrijCommandExcecute, CanChangeKartrijCommandExcecuted);
             ChangeClientCommand = new LambdaCommand(ChangeClientCommandExcecute, CanChangeClientCommandExcecuted);
             clientId = _clientId;
+            window = _window;
             GetAllFilters();
             GetAllInfo();
         }
@@ -111,11 +113,12 @@ namespace RegistrationClinik.ViewModels
             using ApplicationConnect db = new();
             var result = db.DBTable.FirstOrDefault(s => s.Id == clientId);
             result.Name = ClientModel.Name;
-            result.Adres = ClientModel.Name;
-            result.PhoneNumber = ClientModel.Name;
+            result.Adres = ClientModel.Adres;
+            result.PhoneNumber = ClientModel.PhoneNumber;
             result.ModelId = ClientSelectedFilter.Id;
             db.SaveChanges();
-            MessageBox.Show("Успешно сохранено, можете закрыть окно!");
+            MessageBox.Show("Успешно сохранено!");
+            window.Close();
         }
 
         //тут берем данные клиента и его картриджы
