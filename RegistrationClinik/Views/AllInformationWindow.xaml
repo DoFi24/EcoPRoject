@@ -67,7 +67,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Width="0.3*" Binding="{Binding Number}"/>
                     <DataGridTextColumn Header="Имя Картриджа" Width="0.6*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Дата установки" Width="0.8*" Binding="{Binding StartDate,StringFormat=dd.MM.yyyy}"/>
+                    <DataGridTextColumn Header="Дата замены" Width="0.8*" Binding="{Binding StartDate,StringFormat=dd.MM.yyyy}"/>
                     <DataGridTextColumn Header="Дата окончание" Width="0.8*" Binding="{Binding EndDate,StringFormat=dd.MM.yyyy}"/>
                     <DataGridTemplateColumn Header="Обн."  Width="0.4*">
                         <DataGridTemplateColumn.CellTemplate>
