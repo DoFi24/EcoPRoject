@@ -73,6 +73,15 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding FistTime , StringFormat=dd.MM.yyyy}"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn  Header="Ф.И.О." Width="0.7*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -82,7 +91,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Номер телефона" Width="0.6*">
+                    <DataGridTemplateColumn Header="Номер телефона" Width="0.5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
@@ -100,7 +109,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
+                    <DataGridTemplateColumn Header="Последняя замена"  Width="0.35*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
