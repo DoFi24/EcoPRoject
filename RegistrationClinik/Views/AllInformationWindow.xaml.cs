@@ -26,7 +26,7 @@ namespace RegistrationClinik.Views
         {
             InitializeComponent();
             main = _main;
-            DataContext = new AllInformationWindowViewModel(id);
+            DataContext = new AllInformationWindowViewModel(id, this);
         }
 
         private void close(object sender, RoutedEventArgs e)

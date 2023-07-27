@@ -117,7 +117,13 @@ namespace RegistrationClinik.ViewModels
             foreach (var i in KartrijCollection)
             {
                 if (i.IsSelected)
-                    db.DBKartrigList.Add(new DBKartrigList { StartDate = clientStartDate.Date, EndDate = clientStartDate.AddDays(i.Srok).Date, KartrijId = i.Id, TableId = result.Entity.Id });
+                    db.DBKartrigList.Add(new DBKartrigList 
+                    { 
+                        StartDate = clientStartDate.Date, 
+                        EndDate = clientStartDate.AddMonths(i.Srok).Date, 
+                        KartrijId = i.Id, 
+                        TableId = result.Entity.Id 
+                    });
             }
             db.SaveChanges();
             viewModel.GetAllData();
