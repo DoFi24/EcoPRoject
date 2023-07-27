@@ -102,7 +102,15 @@ namespace RegistrationClinik.ViewModels
         }
         private void ChangeKartrijCommandExcecute(object obj)
         {
-            new ChangeKartrijWindow(this, SelectedKartrij.Id).ShowDialog();
+            using ApplicationConnect db = new();
+            var resylt = db.DBKartrigList.FirstOrDefault(s => s.Id == SelectedKartrij.Id);
+            if (resylt != null)
+            {
+                resylt.StartDate = DateTime.Now;
+                resylt.EndDate = DateTime.Now.AddMonths(db.DBKartrij.FirstOrDefault(s=>s.Id == SelectedKartrij.KarId).Srok);
+                db.SaveChanges();
+                GetAllInfo();
+            }
         }
         private bool CanChangeClientCommandExcecuted(object arg)
         {
@@ -133,6 +141,7 @@ namespace RegistrationClinik.ViewModels
                 KartrijCollection.Add(new KartrijInfoModel
                 {
                     Id = result[i].Id,
+                    KarId = result[i].KartrijId,
                     Number = i+1,
                     StartDate = result[i].StartDate,
                     EndDate = result[i].EndDate,

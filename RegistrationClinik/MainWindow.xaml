@@ -100,7 +100,16 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
+                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding SetupDate , StringFormat=dd.MM.yyyy}"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата замены"  Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
