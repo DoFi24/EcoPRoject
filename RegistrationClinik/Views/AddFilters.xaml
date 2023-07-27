@@ -38,7 +38,7 @@
                 </Grid.ColumnDefinitions>
                 <GroupBox Header="Фильтры" Style="{StaticResource MaterialDesignGroupBox}"
                         Margin="5" mt:ElevationAssist.Elevation="Dp6" BorderThickness="1">
-                    <ListBox ItemsSource="{Binding FilterCollection,UpdateSourceTrigger=PropertyChanged}" 
+                    <ListBox ItemsSource="{Binding FilterCollection,UpdateSourceTrigger=PropertyChanged}"
                              SelectedItem="{Binding SelectedFilter, UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

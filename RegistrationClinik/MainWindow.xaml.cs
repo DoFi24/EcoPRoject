@@ -42,7 +42,10 @@ namespace RegistrationClinik
 
         private void Normal(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Normal;
+            if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+            else
+                this.WindowState = WindowState.Normal;
         }
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

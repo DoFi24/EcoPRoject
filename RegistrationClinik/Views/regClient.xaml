@@ -82,7 +82,7 @@
                 <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
                     <GroupBox Header="Картриджи" Style="{StaticResource MaterialDesignGroupBox}"
                         Margin="16" mt:ElevationAssist.Elevation="Dp6" BorderThickness="1">
-                        <ItemsControl Grid.Column="1" 
+                        <ItemsControl Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto"
                                       ItemsSource="{Binding KartrijCollection}"
                                       Grid.Row="1" Grid.IsSharedSizeScope="True">
                             <ItemsControl.ItemTemplate>
