@@ -55,7 +55,7 @@
                 <TextBox Text="{Binding ClientName}" FontSize="15" Padding="10" VerticalContentAlignment="Center"  mt:HintAssist.Hint="Ф.И.О." Height="50" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 <TextBox Text="{Binding ClientPhone}" FontSize="15" Padding="10" VerticalContentAlignment="Center" mt:HintAssist.Hint="Номер телефона" mt:TransitionAssist.DisableTransitions="True" Height="50" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 <TextBox Text="{Binding ClientAdres}" FontSize="15" Padding="10" VerticalContentAlignment="Center" mt:HintAssist.Hint="Адрес установки" Height="50"   Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                <DatePicker Text="{Binding ClientStartDate}" FontSize="15" Padding="10" VerticalContentAlignment="Center" Height="50" mt:HintAssist.Hint="Выберите дату" Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <DatePicker SelectedDate="{Binding ClientStartDate,UpdateSourceTrigger=PropertyChanged}" FontSize="15" Padding="10" VerticalContentAlignment="Center" Height="50" mt:HintAssist.Hint="Выберите дату" Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" 
                    Text="Фильтр" Style="{DynamicResource MaterialDesignSubtitle2TextBlock}"/>
                 <ComboBox FontSize="11" Grid.Column="1" Grid.Row="4" 

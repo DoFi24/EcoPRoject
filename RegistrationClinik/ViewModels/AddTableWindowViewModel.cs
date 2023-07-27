@@ -102,8 +102,9 @@ namespace RegistrationClinik.ViewModels
         }
         private void CreateClientCommandExecute(object obj)
         {
-            if (clientSelectedFilter is null)
+            if (ClientSelectedFilter is null)
                 return;
+            MessageBox.Show(ClientStartDate.ToShortDateString());
             using ApplicationConnect db = new();
             var result = db.DBTable.Add(new DBTable
             {
@@ -119,8 +120,9 @@ namespace RegistrationClinik.ViewModels
                 if (i.IsSelected)
                     db.DBKartrigList.Add(new DBKartrigList 
                     { 
-                        StartDate = clientStartDate.Date, 
-                        EndDate = clientStartDate.AddMonths(i.Srok).Date, 
+                        SetupDate = ClientStartDate.Date, 
+                        StartDate = ClientStartDate.Date,
+                        EndDate = ClientStartDate.AddMonths(i.Srok).Date, 
                         KartrijId = i.Id, 
                         TableId = result.Entity.Id 
                     });

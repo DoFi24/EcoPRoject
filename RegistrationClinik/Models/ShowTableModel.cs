@@ -9,6 +9,7 @@ namespace RegistrationClinik.Models
         public string? Adres { get; set; }
         public string? PhoneNumber { get; set; }
         public string ModelName { get; set; } = "";
+        public DateTime? SetupDate { get; set; }
         public DateTime? StartTimer { get; set; }
         public DateTime? EndTimer { get; set; }
         public int IsActive { get; set; }
