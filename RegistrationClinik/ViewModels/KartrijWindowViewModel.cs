@@ -100,6 +100,7 @@ namespace RegistrationClinik.ViewModels
         }
 
         #endregion
+
         private void EndVoid()
         {
             KartrijName = string.Empty;

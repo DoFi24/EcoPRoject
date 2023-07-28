@@ -40,7 +40,7 @@
                 <TextBlock Text="Срок годности месяц" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Margin="5"/>
                 <TextBox Text="{Binding KartrijName,UpdateSourceTrigger=PropertyChanged}" mt:HintAssist.Hint="Введите название фильтра" Height="50" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10 0 0 0" VerticalContentAlignment="Center" FontSize="18" Margin="5"/>
                 <TextBox Text="{Binding KartrijSrok,UpdateSourceTrigger=PropertyChanged}" mt:HintAssist.Hint="Введите срок работы (месяц)" Height="50" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10 0 0 0" VerticalContentAlignment="Center" FontSize="18" Margin="5"/>
-                <Button Grid.Row="2" Grid.ColumnSpan="2" Width="300" Command="{Binding CreateKartrijCommand}" Content="Добавить" Margin="5"/>
+                <Button Grid.Row="2" Grid.ColumnSpan="2" Command="{Binding CreateKartrijCommand}" Content="Добавить" Margin="5" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>

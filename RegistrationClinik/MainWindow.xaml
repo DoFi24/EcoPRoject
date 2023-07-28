@@ -10,6 +10,24 @@
         d:DataContext="{d:DesignInstance Type=vm:MainWindowVIewModel}"
         Title="MainWindow" Height="700" Width="1500" MinHeight="550" MinWidth="800" WindowStartupLocation="CenterScreen"
         WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Duration="0:0:2" To="White" AutoReverse="True" 
+                                                            RepeatBehavior="Forever" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MinHeight="100"/>
@@ -77,15 +95,16 @@
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Id}"/>
+
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата утановки"  Width="0.3*">
+                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding FistTime , StringFormat=dd.MM.yyyy}"/>
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding SetupDate , StringFormat=dd.MM.yyyy}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -108,20 +127,11 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn  Header="Адресс" Width="0.6*">
+                    <DataGridTemplateColumn  Header="Адрес" Width="0.6*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
                                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Adres}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.3*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding SetupDate , StringFormat=dd.MM.yyyy}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -153,7 +163,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Изменить"  Width="140">
+                    <DataGridTemplateColumn Header=""  Width="140">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.OpenInfoCommand, 
