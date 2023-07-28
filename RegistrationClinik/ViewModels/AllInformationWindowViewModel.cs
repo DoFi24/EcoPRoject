@@ -158,7 +158,7 @@ namespace RegistrationClinik.ViewModels
         private static string GetKartrijName(int Id)
         {
             using ApplicationConnect db = new();
-            return db.DBKartrij.FirstOrDefault(s => s.Id == Id).Name;
+            return db.DBKartrij.FirstOrDefault(s => s.Id == Id).Name ?? "Удалено!";
         }
         private void GetAllFilters()
         {
