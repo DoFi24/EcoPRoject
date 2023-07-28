@@ -68,12 +68,13 @@ namespace RegistrationClinik.ViewModels
         private bool CanCreateKartrijCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(KartrijName) && kartrijSrok > 0;
         private void CreateKartrijCommandExecute(object obj)
         {
-            if (KartrijName is null && kartrijSrok <= 0) 
+            if (KartrijName is null && kartrijSrok <= 0)
                 return;
             using ApplicationConnect db = new();
-            db.DBKartrij.Add(new DBKartrij { Name = KartrijName, Srok = KartrijSrok});
+            db.DBKartrij.Add(new DBKartrij { Name = KartrijName, Srok = KartrijSrok });
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Добавлено!");
         }
         private bool CanEditKartrijCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(KartrijName) && !string.IsNullOrEmpty(SelectedKartrij?.Name) && kartrijSrok > 0;
         private void EditKartrijCommandExecute(object obj)
@@ -86,6 +87,7 @@ namespace RegistrationClinik.ViewModels
             result.Srok = KartrijSrok;
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Изменено!");
         }
         private bool CanDeleteKartrijCommandExecuted(object arg) => !string.IsNullOrEmpty(SelectedKartrij?.Name);
         private void DeleteKartrijCommandExecute(object obj)
@@ -93,10 +95,10 @@ namespace RegistrationClinik.ViewModels
             if (SelectedKartrij is null)
                 return;
             using ApplicationConnect db = new();
-            var result = db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id);
-            _ = db.DBKartrij.Remove(result);
+            db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id).IsActive = false;
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Удалено!");
         }
 
         #endregion
@@ -105,13 +107,12 @@ namespace RegistrationClinik.ViewModels
         {
             KartrijName = string.Empty;
             KartrijSrok = 0;
-            MessageBox.Show("Успешно!");
             GetAllKartrij();
         }
         private void GetAllKartrij()
         {
             using ApplicationConnect db = new();
-            KartrijCollection = new ObservableCollection<DBKartrij>(db.DBKartrij);
+            KartrijCollection = new ObservableCollection<DBKartrij>(db.DBKartrij.Where(s => s.IsActive)); ;
         }
     }
 }

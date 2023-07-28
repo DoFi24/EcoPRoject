@@ -65,6 +65,8 @@ namespace RegistrationClinik.ViewModels
             db.DBFilter.Add(new DBFilter { Name = FilterName });
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Добавлено!");
+
         }
         private bool CanEditFilterCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(FilterName) && !string.IsNullOrEmpty(SelectedFilter?.Name);
         private void EditFilterCommandExecute(object obj)
@@ -76,6 +78,8 @@ namespace RegistrationClinik.ViewModels
             result.Name = FilterName;
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Изменено!");
+
         }
         private bool CanDeleteFilterCommandExecuted(object arg) => !string.IsNullOrEmpty(SelectedFilter?.Name);
         private void DeleteFilterCommandExecute(object obj)
@@ -83,23 +87,22 @@ namespace RegistrationClinik.ViewModels
             if (SelectedFilter is null)
                 return;
             using ApplicationConnect db = new();
-            var result = db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id);
-            _ = db.DBFilter.Remove(result);
+            db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id).IsActive = false;
             db.SaveChanges();
             EndVoid();
+            MessageBox.Show("Удалено!");
         }
 
         #endregion
-        private void EndVoid() 
+        private void EndVoid()
         {
             FilterName = string.Empty;
-            MessageBox.Show("Успешно!");
             GetAllFilters();
         }
         private void GetAllFilters()
         {
             using ApplicationConnect db = new();
-            FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter);
+            FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter.Where(s => s.IsActive));
         }
     }
 }
