@@ -11,11 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Eco-Life-icons.ico" />
+    <None Remove="Eco-Life.ico" />
     <None Remove="icons\Eco-Life.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="icons\Eco-Life1.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Eco-Life-icons.ico" />
+    <EmbeddedResource Include="Eco-Life.ico" />
   </ItemGroup>
 
   <ItemGroup>
