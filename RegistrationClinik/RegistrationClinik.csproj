@@ -5,9 +5,9 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <PackageIcon>Eco-Life.ico</PackageIcon>
+    <PackageIcon>Eco-Life1.ico</PackageIcon>
     <Description>Eco-Life</Description>
-    <ApplicationIcon>icons\Eco-Life.ico</ApplicationIcon>
+    <ApplicationIcon>icons\Eco-Life1.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icons\Eco-Life.ico" />
+    <Content Include="icons\Eco-Life1.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icons\Eco-Life.png" />
+    <Resource Include="icons\Eco-Life1.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="icons\Eco-Life.ico">
+    <None Update="icons\Eco-Life1.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
