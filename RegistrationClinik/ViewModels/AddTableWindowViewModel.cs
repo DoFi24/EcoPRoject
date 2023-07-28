@@ -104,7 +104,6 @@ namespace RegistrationClinik.ViewModels
         {
             if (ClientSelectedFilter is null)
                 return;
-            MessageBox.Show(ClientStartDate.ToShortDateString());
             using ApplicationConnect db = new();
             var result = db.DBTable.Add(new DBTable
             {
@@ -118,13 +117,13 @@ namespace RegistrationClinik.ViewModels
             foreach (var i in KartrijCollection)
             {
                 if (i.IsSelected)
-                    db.DBKartrigList.Add(new DBKartrigList 
-                    { 
-                        SetupDate = ClientStartDate.Date, 
+                    db.DBKartrigList.Add(new DBKartrigList
+                    {
+                        SetupDate = ClientStartDate.Date,
                         StartDate = ClientStartDate.Date,
-                        EndDate = ClientStartDate.AddMonths(i.Srok).Date, 
-                        KartrijId = i.Id, 
-                        TableId = result.Entity.Id 
+                        EndDate = ClientStartDate.AddMonths(i.Srok).Date,
+                        KartrijId = i.Id,
+                        TableId = result.Entity.Id
                     });
             }
             db.SaveChanges();
