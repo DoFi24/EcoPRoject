@@ -5,21 +5,30 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon>Eco-Life.ico</PackageIcon>
+    <Description>Eco-Life</Description>
+    <ApplicationIcon>icons\Eco-Life.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="icons\edit_ico.ico" />
+    <None Remove="icons\Eco-Life.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icons\edit_ico.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="icons\Eco-Life.ico" />
+    <Resource Include="icons\Eco-Life.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icons\Eco-Life.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
