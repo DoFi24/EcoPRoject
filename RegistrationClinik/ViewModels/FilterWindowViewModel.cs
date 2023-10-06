@@ -1,5 +1,6 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -61,36 +62,55 @@ namespace RegistrationClinik.ViewModels
         private bool CanCreateFilterCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(FilterName);
         private void CreateFilterCommandExecute(object obj)
         {
-            using ApplicationConnect db = new();
-            db.DBFilter.Add(new DBFilter { Name = FilterName });
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Добавлено!");
-
+            try
+            {
+                using ApplicationConnect db = new();
+                db.DBFilter.Add(new DBFilter { Name = FilterName });
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Добавлено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private bool CanEditFilterCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(FilterName) && !string.IsNullOrEmpty(SelectedFilter?.Name);
         private void EditFilterCommandExecute(object obj)
         {
-            if (SelectedFilter is null)
-                return;
-            using ApplicationConnect db = new();
-            var result = db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id);
-            result.Name = FilterName;
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Изменено!");
-
+            try
+            {
+                if (SelectedFilter is null)
+                    return;
+                using ApplicationConnect db = new();
+                var result = db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id);
+                result.Name = FilterName;
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Изменено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private bool CanDeleteFilterCommandExecuted(object arg) => !string.IsNullOrEmpty(SelectedFilter?.Name);
         private void DeleteFilterCommandExecute(object obj)
         {
-            if (SelectedFilter is null)
-                return;
-            using ApplicationConnect db = new();
-            db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id).IsActive = false;
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Удалено!");
+            try
+            {
+                if (SelectedFilter is null)
+                    return;
+                using ApplicationConnect db = new();
+                db.DBFilter.FirstOrDefault(s => s.Id == SelectedFilter.Id).IsActive = false;
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Удалено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion
@@ -101,8 +121,15 @@ namespace RegistrationClinik.ViewModels
         }
         private void GetAllFilters()
         {
-            using ApplicationConnect db = new();
-            FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter.Where(s => (bool)s.IsActive));
+            try
+            {
+                using ApplicationConnect db = new();
+                FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter.Where(s => s.IsActive));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

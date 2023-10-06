@@ -8,26 +8,9 @@
         xmlns:mt="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowVIewModel}"
+        Closed="Window_Closed"
         Title="MainWindow" Height="700" Width="1500" MinHeight="550" MinWidth="800" WindowStartupLocation="CenterScreen"
-        WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize" MouseDown="Window_MouseDown">
-    <Window.Resources>
-        <Style TargetType="Border">
-            <Setter Property="BorderThickness" Value="5"/>
-            <Setter Property="BorderBrush" Value="Red"/>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Duration="0:0:2" To="White" AutoReverse="True" 
-                                                            RepeatBehavior="Forever" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
+        WindowState="Maximized" WindowStyle="None" ResizeMode="CanResize" MouseLeftButtonDown="Window_MouseDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MinHeight="100"/>
@@ -43,17 +26,6 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Grid Grid.RowSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.25*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.RowSpan="2" HorizontalAlignment="Left" Source="icons/Eco-Life.png" Margin="10 35 0 -15"/>
-                <StackPanel HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Bottom">
-                    <TextBlock Text="Eco-Life" FontSize="26" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FF000AB9" />
-                    <TextBlock Text="clean water" FontSize="16" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FF000AB9"/>
-                </StackPanel>
-            </Grid>
             <!--<StackPanel HorizontalAlignment="Center" Grid.Column="1" Orientation="Horizontal">
                 <Image Grid.RowSpan="2" HorizontalAlignment="Left" Source="icons/Eco-Life.png" Margin="0 2 10 2"/>
                 <TextBlock Text="Eco-Life" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Foreground="#FF000AB9" Margin="10 10 10 10"/>
@@ -79,24 +51,60 @@
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" mt:HintAssist.Hint="Поиск" 
                          Margin="10 0 10 0" Height="40" Padding="20 0 0 0" VerticalContentAlignment="Center" 
                          VerticalAlignment="Center" FontSize="18" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Grid.Column="1" Height="40" Content="Поиск" Command="{Binding SearchCommand}" Margin="10 0 0 0"/>
-                <Button Grid.Column="2" Height="40" Content="Сбросить" Command="{Binding ClearCommand}" Margin="10 0 0 0"/>
+                <Button Grid.Column="1" Height="40" Padding="7" Command="{Binding SearchCommand}" Margin="10 0 0 0">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Поиск"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="2" Height="40" Padding="7" Command="{Binding ClearCommand}" Margin="10 0 0 0">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Сбросить"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.7*" />
+                    <ColumnDefinition Width="180" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Height="40" Content="Добавить" Click="ShowAddPage" Margin="20 0 0 0"/>
+                <StackPanel MinWidth="180" Panel.ZIndex="1" Orientation="Horizontal">
+                    <Image HorizontalAlignment="Left" Source="icons/Eco-Life.png"/>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <TextBlock Text="Eco-Life" FontSize="26" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FF000AB9" />
+                        <TextBlock Text="clean water" FontSize="16" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#FF000AB9"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Grid.Column="1" Panel.ZIndex="0" Height="40" Padding="5" Click="ShowAddPage">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Добавить"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Height="40" Margin="10 0 10 0" Content="Добавить фильтр" Padding="0" Click="ShowAddFilter" Cursor="Hand"/>
-                <Button Grid.Column="2" Height="40" Margin="10 0 10 0" Content="Добавить картридж" Padding="0" Click="ShowAddKartij" Cursor="Hand"/>
+                <Button Grid.Column="0" Height="40" Margin="10 0 10 0" Padding="5" Click="ShowAddFilter" Cursor="Hand">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Добавить фильтр"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1" Height="40" Margin="10 0 10 0" Padding="5" Click="ShowAddKartij" Cursor="Hand">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Добавить картридж"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -110,13 +118,12 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Id}"/>
-
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Number}"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.3*">
+                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.4*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
@@ -125,7 +132,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn  Header="Ф.И.О." Width="0.7*">
+                    <DataGridTemplateColumn  Header="Ф.И.О." Width="0.5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
@@ -143,7 +150,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn  Header="Адрес" Width="0.6*">
+                    <DataGridTemplateColumn  Header="Адрес" Width="0.5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
@@ -152,7 +159,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата замены"  Width="0.3*">
+                    <DataGridTemplateColumn Header="Дата замены"  Width="0.4*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">
@@ -161,7 +168,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Окончание срока" Width="0.3*">
+                    <DataGridTemplateColumn Header="Окончание срока" Width="0.4*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="{Binding RowBackground}">

@@ -1,5 +1,6 @@
 ﻿using RegistrationClinik.Infras;
 using RegistrationClinik.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -68,37 +69,58 @@ namespace RegistrationClinik.ViewModels
         private bool CanCreateKartrijCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(KartrijName) && kartrijSrok > 0;
         private void CreateKartrijCommandExecute(object obj)
         {
-            if (KartrijName is null && kartrijSrok <= 0)
-                return;
-            using ApplicationConnect db = new();
-            db.DBKartrij.Add(new DBKartrij { Name = KartrijName, Srok = KartrijSrok });
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Добавлено!");
+            try
+            {
+                if (KartrijName is null && kartrijSrok <= 0)
+                    return;
+                using ApplicationConnect db = new();
+                db.DBKartrij.Add(new DBKartrij { Name = KartrijName, Srok = KartrijSrok });
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Добавлено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private bool CanEditKartrijCommandExecuted(object arg) => !string.IsNullOrWhiteSpace(KartrijName) && !string.IsNullOrEmpty(SelectedKartrij?.Name) && kartrijSrok > 0;
         private void EditKartrijCommandExecute(object obj)
         {
-            if (SelectedKartrij is null)
-                return;
-            using ApplicationConnect db = new();
-            var result = db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id);
-            result.Name = KartrijName;
-            result.Srok = KartrijSrok;
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Изменено!");
+            try
+            {
+                if (SelectedKartrij is null)
+                    return;
+                using ApplicationConnect db = new();
+                var result = db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id);
+                result.Name = KartrijName;
+                result.Srok = KartrijSrok;
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Изменено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private bool CanDeleteKartrijCommandExecuted(object arg) => !string.IsNullOrEmpty(SelectedKartrij?.Name);
         private void DeleteKartrijCommandExecute(object obj)
         {
-            if (SelectedKartrij is null)
-                return;
-            using ApplicationConnect db = new();
-            db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id).IsActive = false;
-            db.SaveChanges();
-            EndVoid();
-            MessageBox.Show("Удалено!");
+            try
+            {
+                if (SelectedKartrij is null)
+                    return;
+                using ApplicationConnect db = new();
+                db.DBKartrij.FirstOrDefault(s => s.Id == SelectedKartrij.Id).IsActive = false;
+                db.SaveChanges();
+                EndVoid();
+                MessageBox.Show("Удалено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion
@@ -111,8 +133,15 @@ namespace RegistrationClinik.ViewModels
         }
         private void GetAllKartrij()
         {
-            using ApplicationConnect db = new();
-            KartrijCollection = new ObservableCollection<DBKartrij>(db.DBKartrij.Where(s => s.IsActive)); ;
+            try
+            {
+                using ApplicationConnect db = new();
+                KartrijCollection = new ObservableCollection<DBKartrij>(db.DBKartrij.Where(s => s.IsActive));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

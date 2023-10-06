@@ -102,34 +102,41 @@ namespace RegistrationClinik.ViewModels
         }
         private void CreateClientCommandExecute(object obj)
         {
-            if (ClientSelectedFilter is null)
-                return;
-            MessageBox.Show(ClientStartDate.ToShortDateString());
-            using ApplicationConnect db = new();
-            var result = db.DBTable.Add(new DBTable
+            try
             {
-                Adres = clientAdres,
-                ModelId = clientSelectedFilter.Id,
-                Name = clientName,
-                PhoneNumber = clientPhone,
-                IsActive = 0
-            });
-            db.SaveChanges();
-            foreach (var i in KartrijCollection)
-            {
-                if (i.IsSelected)
-                    db.DBKartrigList.Add(new DBKartrigList 
-                    { 
-                        SetupDate = ClientStartDate.Date, 
-                        StartDate = ClientStartDate.Date,
-                        EndDate = ClientStartDate.AddMonths(i.Srok).Date, 
-                        KartrijId = i.Id, 
-                        TableId = result.Entity.Id 
-                    });
+                if (ClientSelectedFilter is null)
+                    return;
+                using ApplicationConnect db = new();
+                var result = db.DBTable.Add(new DBTable
+                {
+                    Adres = clientAdres,
+                    ModelId = clientSelectedFilter.Id,
+                    Name = clientName,
+                    PhoneNumber = clientPhone,
+                    IsActive = 0
+                });
+                db.SaveChanges();
+                foreach (var i in KartrijCollection)
+                {
+                    if (i.IsSelected)
+                        db.DBKartrigList.Add(new DBKartrigList
+                        {
+                            SetupDate = ClientStartDate.Date,
+                            StartDate = ClientStartDate.Date,
+                            EndDate = ClientStartDate.AddMonths(i.Srok).Date,
+                            KartrijId = i.Id,
+                            TableId = result.Entity.Id
+                        });
+                }
+                db.SaveChanges();
+                viewModel.GetAllData();
+                MessageBox.Show("Успешно сохранено!");
+
             }
-            db.SaveChanges();
-            viewModel.GetAllData();
-            MessageBox.Show("Успешно сохранено!");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
         private void GetAllFilters()
@@ -139,17 +146,24 @@ namespace RegistrationClinik.ViewModels
         }
         private void GetAllKartrijs()
         {
-            using ApplicationConnect db = new();
-            var result = db.DBKartrij;
-            foreach (var kartrij in result)
+            try
             {
-                KartrijCollection.Add(new ViewKartrijModel
+                using ApplicationConnect db = new();
+                var result = db.DBKartrij;
+                foreach (var kartrij in result)
                 {
-                    Id = kartrij.Id,
-                    Srok = kartrij.Srok,
-                    Name = kartrij.Name,
-                    IsSelected = false
-                });
+                    KartrijCollection.Add(new ViewKartrijModel
+                    {
+                        Id = kartrij.Id,
+                        Srok = kartrij.Srok,
+                        Name = kartrij.Name,
+                        IsSelected = false
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

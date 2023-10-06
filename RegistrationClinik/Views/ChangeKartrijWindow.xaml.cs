@@ -22,29 +22,28 @@ namespace RegistrationClinik.Views
             InitializeComponent();
             this.allVM = _allVM;
             changeKartrijId = id;
-            GetAllKartrijData();
+            //GetAllKartrijData();
         }
 
-        private void GetAllKartrijData()
-        {
-            using ApplicationConnect db = new();
-            var result = db.DBKartrij;
-            ComboBox1.ItemsSource = new List<DBKartrij>(result);
-        }
+        //private void GetAllKartrijData()
+        //{
+        //    using ApplicationConnect db = new();
+        //    var result = db.DBKartrij;
+        //    ComboBox1.ItemsSource = new List<DBKartrij>(result);
+        //}
 
         private void Change(object sender, RoutedEventArgs e)
         {
-            var item = (ComboBox1.SelectedItem as DBKartrij);
-            if (item is null)
+            if (datePicker.SelectedDate is null)
                 return;
 
             using ApplicationConnect db = new();
             var result = db.DBKartrigList.FirstOrDefault(s => s.Id == changeKartrijId);
-            result.StartDate = DateTime.Now;
-            result.EndDate = DateTime.Now.AddDays(item.Srok);
-            result.KartrijId = item.Id;
+            var item = db.DBKartrij.FirstOrDefault(s => s.Id == result.KartrijId);
+            result.StartDate = (DateTime)datePicker.SelectedDate;
+            result.EndDate = (DateTime)datePicker.SelectedDate.Value.AddMonths(item.Srok);
             db.SaveChanges();
-            MessageBox.Show("Изменено");
+            MessageBox.Show("Обновлено!");
             allVM.GetAllInfo();
             Close();
         }

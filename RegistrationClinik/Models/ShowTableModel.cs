@@ -14,5 +14,6 @@ namespace RegistrationClinik.Models
         public DateTime? EndTimer { get; set; }
         public int IsActive { get; set; }
         public string RowBackground { get; set; } = "White";
+        public int Number { get; set; } = 1;
     }
 }

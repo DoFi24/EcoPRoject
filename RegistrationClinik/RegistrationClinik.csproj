@@ -8,9 +8,12 @@
     <PackageIcon>Eco-Life1.ico</PackageIcon>
     <Description>Eco-Life</Description>
     <ApplicationIcon>icons\Eco-Life1.ico</ApplicationIcon>
+    <AssemblyName>EcoLifeCRM</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Eco-Life-icons.ico" />
+    <None Remove="Eco-Life.ico" />
     <None Remove="icons\Eco-Life.png" />
   </ItemGroup>
 
@@ -19,11 +22,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Eco-Life-icons.ico" />
+    <EmbeddedResource Include="Eco-Life.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icons\Eco-Life.png" />
     <Resource Include="icons\Eco-Life1.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
   </ItemGroup>

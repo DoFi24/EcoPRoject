@@ -8,7 +8,8 @@
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:FilterWindowViewModel}"
         mc:Ignorable="d"
-        Title="AddFilters" Height="450" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown">
+        Title="AddFilters" Height="450" Width="1000" WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" Topmost="True" MouseLeftButtonDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />

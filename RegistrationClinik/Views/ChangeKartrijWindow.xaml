@@ -14,8 +14,12 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="0.6*" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Выбор картриджа" Grid.Column="1" Grid.ColumnSpan="3" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
-        <ComboBox Grid.Row="1" FontSize="11" x:Name="ComboBox1" Margin="10"
+        <TextBlock Text="Выберите дату замены" Grid.Column="1" Grid.ColumnSpan="3" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+        <DatePicker x:Name="datePicker"
+                    FontSize="15" Padding="10" VerticalContentAlignment="Center" Height="50" 
+                    mt:HintAssist.Hint="Выберите дату" Grid.Row="1" Width="320"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+        <!--<ComboBox Grid.Row="1" FontSize="11" x:Name="ComboBox1" Margin="10"
                   Height="50" Style="{StaticResource MaterialDesignFilledComboBox}"
                   mt:HintAssist.Hint="Выберите картридж для замены">
             <ComboBox.ItemTemplate>
@@ -30,7 +34,7 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </ComboBox>-->
         <Button Grid.Row="2" HorizontalAlignment="Right" Margin="0 0 40 0" Width="130" Click="Change" Content="Изменить"/>
         <Button Grid.Row="2" Background="Red" HorizontalAlignment="Left" Margin="40 0 0 0" Width="130" Click="CloseWindow" Content="Отмена"/>
     </Grid>
