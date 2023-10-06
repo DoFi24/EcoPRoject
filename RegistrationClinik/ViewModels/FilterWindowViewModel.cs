@@ -102,7 +102,7 @@ namespace RegistrationClinik.ViewModels
         private void GetAllFilters()
         {
             using ApplicationConnect db = new();
-            FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter.Where(s => s.IsActive));
+            FilterCollection = new ObservableCollection<DBFilter>(db.DBFilter.Where(s => (bool)s.IsActive));
         }
     }
 }
