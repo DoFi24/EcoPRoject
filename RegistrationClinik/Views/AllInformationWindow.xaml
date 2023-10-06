@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:RegistrationClinik.Views"
         xmlns:vm="clr-namespace:RegistrationClinik.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:AllInformationWindowViewModel}"
-        mc:Ignorable="d" Closed="Window_Closed"
+        mc:Ignorable="d"
+        xmlns:ft="http://schemas.fontawesome.io/icons/"
         Title="AllInformationWindow" Height="450" Width="1100" WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" MouseDown="Window_MouseDown"  Foreground="#FF0058E8">
+        WindowStyle="None" MouseLeftButtonDown="Window_MouseDown"  Foreground="#FF0058E8">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -61,20 +62,56 @@
         <Grid Grid.Column="3" Grid.Row="1">
             <DataGrid Grid.Row="2" ItemsSource="{Binding KartrijCollection}" 
                       SelectedItem="{Binding SelectedKartrij,UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" FontSize="13" 
-                      CanUserAddRows="False" IsReadOnly="True" 
-                      BorderThickness="0">
+                      AutoGenerateColumns="False" FontSize="13" CellStyle="{x:Null}"
+                      CanUserAddRows="False" IsReadOnly="True" Padding="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Width="0.3*" Binding="{Binding Number}"/>
-                    <DataGridTextColumn Header="Имя Картриджа" Width="0.6*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Дата замены" Width="0.8*" Binding="{Binding StartDate,StringFormat=dd.MM.yyyy}"/>
-                    <DataGridTextColumn Header="Дата окончание" Width="0.8*" Binding="{Binding EndDate,StringFormat=dd.MM.yyyy}"/>
+                    <DataGridTemplateColumn Header="№" Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Number}"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Имя Картриджа"  Width="0.6*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Name}"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата замены"  Width="0.8*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <Button Command="{Binding DataContext.ChangeKartrijByDateCommand,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" 
+                                            Background="Transparent" BorderThickness="0"
+                                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
+                                        <TextBlock FontSize="13" Foreground="Black" Text="{Binding StartDate, StringFormat=dd.MM.yyyy}"/>
+                                    </Button>
+                                    <!--<TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding StartDate,StringFormat=dd.MM.yyyy}"/>-->
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Дата окончание"  Width="0.8*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding RowBackground}">
+                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding EndDate,StringFormat=dd.MM.yyyy}"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Обн."  Width="0.4*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.ChangeKartrijCommand, 
                                     RelativeSource={RelativeSource FindAncestor, 
-                                    AncestorType={x:Type DataGrid}}}" Content="♻️"/>
+                                    AncestorType={x:Type DataGrid}}}" FontSize="20" ft:Awesome.Content="Refresh" Foreground="White"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -100,9 +137,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"  Background="Red" Content="Закрыть" Width="300" Click="close"/>
-            <Button Grid.Column="1"  Command="{Binding ChangeClientCommand}" Content="Сохранить" Width="300" Cursor="Hand"/>
+            <Button Grid.Column="1" Command="{Binding DeleteClientCommand}"  Background="Red" Content="Удалить клиента" Width="300" Click="close"/>
+            <Button Grid.Column="2"  Command="{Binding ChangeClientCommand}" Content="Сохранить" Width="300" Cursor="Hand"/>
         </Grid>
     </Grid>
 </Window>

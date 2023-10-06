@@ -4,6 +4,7 @@ using RegistrationClinik.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace RegistrationClinik.ViewModels
@@ -39,7 +40,7 @@ namespace RegistrationClinik.ViewModels
                 Set(ref selectedClient, value);
             }
         }
-        
+
         private string searchText = "";
         public string SearchText
         {
@@ -56,7 +57,16 @@ namespace RegistrationClinik.ViewModels
         private bool CanSearchCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
         private void SearchCommandExecute(object obj)
         {
-            DBTables = new ObservableCollection<ShowTableModel>(DBTables.Where(s => s.Name.Contains(searchText)).OrderBy(s => s.EndTimer));
+            try
+            {
+
+                DBTables = new ObservableCollection<ShowTableModel>(DBTables.Where(s => s.Name.Contains(searchText)).OrderBy(s => s.EndTimer));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
         private bool CanClearCommandExecuted(object arg) => !string.IsNullOrEmpty(searchText);
         private void ClearCommandExecute(object obj)
@@ -68,43 +78,76 @@ namespace RegistrationClinik.ViewModels
 
         private void OpenInfoCommandExecute(object obj)
         {
-            new AllInformationWindow(this,SelectedClient.Id).Show();
+            new AllInformationWindow(this, SelectedClient.Id).Show();
         }
 
         #endregion
 
         public void GetAllData()
         {
-            using ApplicationConnect db = new();
-            var query = from d in db.DBTable
-                        join kl in db.DBKartrigList on d.Id equals kl.TableId
-                        select new
-                        {
-                            d,
-                            kl
-                        } 
-                        into t1
-                        group t1 by t1.kl.TableId into g
-                        select new ShowTableModel
-                        {
-                            Id = g.FirstOrDefault().d.Id,
-                            Adres = g.FirstOrDefault().d.Adres,
-                            SetupDate = g.FirstOrDefault().kl.SetupDate,
-                            StartTimer = g.FirstOrDefault().kl.StartDate,
-                            EndTimer = g.OrderBy(s=>s.kl.EndDate).FirstOrDefault().kl.EndDate,
-                            IsActive = g.FirstOrDefault().d.IsActive,
-                            Name = g.FirstOrDefault().d.Name,
-                            PhoneNumber = g.FirstOrDefault().d.PhoneNumber,
-                            ModelName = GetModelName(g.FirstOrDefault().d.ModelId),
-                            RowBackground = GetColorOfRow(g.OrderBy(s => s.kl.EndDate).FirstOrDefault().kl.EndDate),
-                        }
-                        ;
-            DBTables = new ObservableCollection<ShowTableModel>(query.OrderBy(s => s.EndTimer));
+            try
+            {
+                DBTables = new ObservableCollection<ShowTableModel>();
+                using ApplicationConnect db = new();
+                var query = (from d in db.DBTable
+                            join kl in db.DBKartrigList on d.Id equals kl.TableId
+                            select new
+                            {
+                                d,
+                                kl
+                            }
+                            into t1
+                            group t1 by t1.kl.TableId into g
+                            select new ShowTableModel
+                            {
+                                Id = g.FirstOrDefault().d.Id,
+                                Adres = g.FirstOrDefault().d.Adres,
+                                SetupDate = g.FirstOrDefault().kl.SetupDate,
+                                StartTimer = g.OrderBy(s => s.kl.StartDate).FirstOrDefault().kl.StartDate,
+                                EndTimer = g.OrderBy(s => s.kl.EndDate).FirstOrDefault().kl.EndDate,
+                                IsActive = g.FirstOrDefault().d.IsActive,
+                                Name = g.FirstOrDefault().d.Name,
+                                PhoneNumber = g.FirstOrDefault().d.PhoneNumber,
+                                ModelName = GetModelName(g.FirstOrDefault().d.ModelId),
+                                RowBackground = GetColorOfRow(g.OrderBy(s => s.kl.EndDate).FirstOrDefault().kl.EndDate),
+                            }).OrderBy(s => s.EndTimer).ToList();
+                for (int i = 0; i < query.Count(); i++)
+                {
+                    DBTables.Add(new ShowTableModel
+                    {
+                        Id = query[i].Id,
+                        SetupDate = query[i].SetupDate,
+                        StartTimer = query[i].StartTimer,
+                        Adres = query[i].Adres,
+                        EndTimer= query[i].EndTimer,
+                        IsActive = query[i].IsActive,
+                        ModelName = query[i].ModelName,
+                        Name = query[i].Name,
+                        Number = i+1,
+                        PhoneNumber = query[i].PhoneNumber,
+                        RowBackground = query[i].RowBackground,
+                    });
+                }
+
+                //DBTables = new ObservableCollection<ShowTableModel>(DBTables);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-        public static string GetModelName(int id) 
+        public static string GetModelName(int id)
         {
-            using ApplicationConnect db = new();
-            return db.DBFilter.FirstOrDefault(s=>s.Id == id)?.Name ?? "Не найдено!";
+            try
+            {
+                using ApplicationConnect db = new();
+                return db.DBFilter.FirstOrDefault(s => s.Id == id)?.Name ?? "Не найдено!";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "Не найдено!";
+            }
         }
         public static string GetColorOfRow(DateTime date)
         {
