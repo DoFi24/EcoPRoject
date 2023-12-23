@@ -18,7 +18,7 @@ namespace RegistrationClinik.Infras
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user=root;password=;database=EcolifeDB;",
+            optionsBuilder.UseMySql("server=localhost;user=root;password=;database=EcolifeDB;default command timeout = 60",
                  new MySqlServerVersion(new Version(5, 7, 29))
              );
         }

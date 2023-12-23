@@ -108,95 +108,106 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
-            <DataGrid ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
-                      RowBackground="White" BorderThickness="0" IsReadOnly="True"
-                      SelectedItem="{Binding SelectedClient,UpdateSourceTrigger=PropertyChanged}"
-                      CellStyle="{x:Null}" Foreground="Black" Margin="20"
-                      AutoGenerateColumns="False" FontSize="16">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="№"  Width="0.2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Number}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.4*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding SetupDate , StringFormat=dd.MM.yyyy}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn  Header="Ф.И.О." Width="0.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Name}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Номер телефона" Width="0.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black"  Text="{Binding PhoneNumber}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn  Header="Адрес" Width="0.5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Adres}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Дата замены"  Width="0.4*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Окончание срока" Width="0.4*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Модель" Width="0.3*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Background="{Binding RowBackground}">
-                                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding ModelName}"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header=""  Width="140">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Command="{Binding DataContext.OpenInfoCommand, 
+            <StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Height="40">
+                    <Button Content="◀️" Command="{Binding PreviewPageCommand}" FontSize="20" Padding="0" Width="40" Height="30" Margin="0 0 10 0"/>
+                    <TextBox Text="{Binding CurrentPage,UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0" HorizontalContentAlignment="Center" Width="60" FontSize="20" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding MaxPage, StringFormat= из 0}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                    <Button Content="▶️" Command="{Binding NextPageCommand}" FontSize="20" Padding="0" Width="40" Height="30" Margin="10 0 0 0"/>
+                </StackPanel>
+                <ScrollViewer>
+                    <DataGrid ScrollViewer.CanContentScroll="True"
+                          ItemsSource="{Binding DBTables}" CanUserAddRows="False" 
+                          RowBackground="White" BorderThickness="0" IsReadOnly="True"
+                          SelectedItem="{Binding SelectedClient,UpdateSourceTrigger=PropertyChanged}"
+                          CellStyle="{x:Null}" Foreground="Black" Margin="10 10 10 0" 
+                          AutoGenerateColumns="False" FontSize="16">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="№"  Width="0.2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Number}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Дата уcтановки"  Width="0.4*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding SetupDate , StringFormat=dd.MM.yyyy}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn  Header="Ф.И.О." Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Name}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Номер телефона" Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black"  Text="{Binding PhoneNumber}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn  Header="Адрес" Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding Adres}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Дата замены"  Width="0.4*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding StartTimer , StringFormat=dd.MM.yyyy}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Окончание срока" Width="0.4*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding EndTimer ,StringFormat=dd.MM.yyyy}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Модель" Width="0.3*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding RowBackground}">
+                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Foreground="Black" Text="{Binding ModelName}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header=""  Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.OpenInfoCommand, 
                                     RelativeSource={RelativeSource FindAncestor, 
                                     AncestorType={x:Type DataGrid}}}" Content="Изменить"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
